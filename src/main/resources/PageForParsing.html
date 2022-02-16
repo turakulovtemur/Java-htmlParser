@@ -1,0 +1,1540 @@
+<!doctype html>
+<html> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4"> 
+  <title>
+Использование Java JSoup для анализа кода HTML
+</title> 
+  <meta name="Keywords" content="Использование Java JSoup для анализа кода HTML"> 
+  <meta name="Description" content="Использование Java JSoup для анализа кода HTML"> 
+  <meta property="og:site_name" content="betacode"> 
+  <meta property="og:image:type" content="image/png"> 
+  <meta property="og:image:width" content="849"> 
+  <meta property="og:image:height" content="540"> 
+  <meta property="og:image" content="https://s2.o7planning.com/templates/o7planning/resources/icons/triceratops.png"> 
+  <link rel="image_src" href="https://s2.o7planning.com/templates/o7planning/resources/icons/triceratops.png"> 
+  <link rel="shortcut icon" href="https://s2.o7planning.com/templates/o7planning/resources/images/favi.png" type="image/png"> <!-- (beta) --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NLTMNPF');</script> 
+  <link rel="stylesheet" type="text/css" href="https://s2.o7planning.com/templates/o7planning/resources/main3.css"> 
+  <link rel="stylesheet" type="text/css" href="https://s2.o7planning.com/templates/o7planning/resources/libs/syntaxhighlighter/syntaxhighlighter.css"> 
+  <link rel="stylesheet" type="text/css" href="https://s2.o7planning.com/templates/o7planning/resources/libs/syntaxhighlighter/syntaxhighlighter-extends.css"> 
+  <link rel="stylesheet" type="text/css" href="https://s2.o7planning.com/templates/o7planning/resources/libs/cssmenu/cssmenu-styles.css"> 
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> 
+  <script type="text/javascript" src="https://s2.o7planning.com/templates/o7planning/resources/libs/syntaxhighlighter/syntaxhighlighter.js"></script> 
+  <script type="text/javascript" src="https://s2.o7planning.com/templates/o7planning/resources/main3.js"></script> 
+  <script type="text/javascript" src="https://s2.o7planning.com/templates/o7planning/resources/libs/cssmenu/cssmenu-script.js"></script> <!--@CODE_HOLDER@--> 
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script> 
+  <script>
+window.googletag = window.googletag || {cmd: []};
+var gptAdSlots = [];
+googletag.cmd.push(function() {
+var mapping1 = googletag.sizeMapping().
+addSize([992, 0], [728,90]). // desktop
+addSize([640, 0], [336, 280]). // tablet
+addSize([320, 0], [300, 250]). // mobile
+build();
+var mapping2 = googletag.sizeMapping().
+addSize([992, 0], [728,90]). // desktop
+addSize([320, 0], [320, 100]). // mobile
+build();
+gptAdSlots[0]=googletag.defineSlot('/93656639/O7planning/o7planning.org_Masthead_res', [[970, 250], [300, 250], [336, 280], [728, 90]], 'div-gpt-ad-1608110235176-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[1]=googletag.defineSlot('/93656639/O7planning/o7planning.org_res1', [[300, 250], [728, 90], [336, 280]], 'div-gpt-ad-1608110313359-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[2]=googletag.defineSlot('/93656639/O7planning/o7planning.org_res2', [[728, 90], [300, 250], [336, 280]], 'div-gpt-ad-1608110500857-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[3]=googletag.defineSlot('/93656639/O7planning/o7planning.org_res3', [[300, 250], [728, 90], [336, 280]], 'div-gpt-ad-1608110554074-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[4]=googletag.defineSlot('/93656639/O7planning/o7planning.org_res4', [[336, 280], [300, 250], [728, 90]], 'div-gpt-ad-1608110608567-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[5]=googletag.defineSlot('/93656639/O7planning/o7planning.org_res5', [[336, 280], [728, 90], [300, 250]], 'div-gpt-ad-1608110750587-0').defineSizeMapping(mapping1).addService(googletag.pubads());
+gptAdSlots[6]=googletag.defineSlot('/93656639/O7planning/o7planning.org_300x250_right1', [300, 250], 'div-gpt-ad-1608110835527-0').addService(googletag.pubads());
+gptAdSlots[7]=googletag.defineSlot('/93656639/O7planning/o7planning.org_300x250_right2', [300, 250], 'div-gpt-ad-1608110992085-0').addService(googletag.pubads());
+gptAdSlots[8]=googletag.defineSlot('/93656639/O7planning/o7planning.org_160x600_Sticky', [160, 600], 'div-gpt-ad-1608111040429-0').addService(googletag.pubads());
+gptAdSlots[9]=googletag.defineSlot('/93656639/O7planning/o7planning.org_300x600_Sticky', [300, 600], 'div-gpt-ad-1608111095491-0').addService(googletag.pubads());
+gptAdSlots[10]=googletag.defineSlot('/93656639/O7planning/o7planning.org_footer', [[320, 100], [728, 90]], 'div-gpt-ad-1609211431265-0').defineSizeMapping(mapping2).addService(googletag.pubads());
+//
+googletag.enableServices();
+});
+</script> <!--sharethis-holder--> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="x-root"> 
+    <div class="x-left"> 
+    </div> 
+    <div class="x-right"> 
+     <div id="header-container" class="page-max-width"> 
+      <div id="header-site-brand"> <span> <a class="home-icon-link" href="https://betacode.net"><img height="55" src="https://s2.o7planning.com/templates/o7planning/resources/icons/triceratops.png"></a> </span> <span id="header-site-name">betacode</span> 
+      </div> 
+      <div id="header-right-bar"> 
+       <div id="header-search-bar"> 
+       </div> 
+       <div id="header-languages-bar"> <a target="_blank" href="https://o7planning.org" hreflang="en" title="English"> <img src="https://s2.o7planning.com/templates/o7planning/resources/images/languages/en.png" height="25" style="padding:0px 2px;border:1px solid black"> </a> <a target="_blank" href="https://openplanning.net" hreflang="vi" title="Vietnamese"> <img src="https://s2.o7planning.com/templates/o7planning/resources/images/languages/vi.png" height="25" style="padding:0px 2px;border:1px solid black"> </a> <a target="_blank" href="https://codestory.de" hreflang="de" title="German"> <img src="https://s2.o7planning.com/templates/o7planning/resources/images/languages/de.png" height="25" style="padding:0px 2px;border:1px solid black"> </a> <a target="_blank" href="https://devstory.net" hreflang="fr" title="French"> <img src="https://s2.o7planning.com/templates/o7planning/resources/images/languages/fr.png" height="25" style="padding:0px 2px;border:1px solid black"> </a> <a target="_blank" href="https://betacode.net" hreflang="ru" title="Rusian"> <img src="https://s2.o7planning.com/templates/o7planning/resources/images/languages/ru.png" height="25" style="padding:0px 2px;border:1px solid white"> </a> 
+       </div> 
+       <div id="header-logined-user"> 
+       </div> 
+       <div style="clear:both;"></div> 
+       <div id="header-fan-pages"> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </header> 
+  <div class="x-root"> 
+   <div class="x-left"> 
+    <section id="section-root-left-floating"> 
+     <div class="ads-container"> <!-- Float Left 101 --> <!-- NETLINK --> <!-- 160x600_Sticky --> 
+      <div id="div-gpt-ad-1608111040429-0" style="width: 160px; height: 600px;"> 
+       <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608111040429-0'); });
+  </script> 
+      </div> 
+     </div> 
+    </section> 
+   </div> 
+   <div class="x-right"> 
+    <section id="section-root-menu"> 
+     <div id="cssmenu" class="inner-wrapper"> 
+      <ul> 
+       <li> <a href="https://betacode.net" style="">Все Pуководства</a> </li> 
+       <li> <a href="javascript:void(0)" style="cursor:default;">Java</a> 
+        <ul> 
+         <li> <a href="/10973/java-basic">Java Basic</a> </li> 
+         <li> <a href="/10985/advanced-java">Расширенный Java</a> </li> 
+         <li> <a href="/10981/eclipse-technology">Технология Eclipse</a> 
+          <ul> 
+           <li> <a href="/11119/swt">SWT</a> </li> 
+           <li> <a href="/10953/eclipse-rcp">Eclipse RCP</a> </li> 
+           <li> <a href="/10955/eclipse-rap">Eclipse RAP</a> </li> 
+           <li> <a href="/10943/eclipse-plugin-tools">Eclipse Plugin Tools</a> </li> 
+          </ul> </li> 
+         <li> <a href="/10983/html-xml-java-api">Java API для HTML, XML</a> </li> 
+         <li> <a href="/11005/java-open-source-libraries">Java Open source libraries</a> </li> 
+         <li> <a href="/11587/java-application-servers" style="">Java Application Servers</a> </li> 
+        </ul> </li> 
+       <li> <a href="/10957/maven" style="">Maven</a> </li> 
+       <li> <a href="/11239/gradle" style="">Gradle</a> </li> 
+       <li> <a href="/10979/servlet-jsp" style="">Servlet/Jsp</a> </li> 
+       <li> <a href="/12345/thymeleaf" style="">Thymeleaf</a> </li> 
+       <li> <a href="javascript:void(0)" style="cursor:default;">Spring</a> 
+        <ul> 
+         <li> <a href="/11669/spring-boot" style="">Spring Boot</a> </li> 
+         <li> <a href="/11701/spring-cloud" style="">Spring Cloud</a> </li> 
+        </ul> </li> 
+       <li> <a href="/10961/struts2" style="">Struts2</a> </li> 
+       <li> <a href="/10969/hibernate" style="">Hibernate</a> </li> 
+       <li> <a href="/11201/java-web-services" style="">Java Web Service</a> </li> 
+       <li> <a href="/11009/javafx">JavaFX</a> </li> 
+       <li> <a href="/11119/swt">SWT</a> </li> 
+       <li> <a href="/11023/oracle-adf">Oracle ADF</a> </li> 
+       <li> <a href="/11007/android">Android</a> </li> 
+       <li> <a href="/11043/ios" style="">iOS</a> </li> 
+       <li> <a href="/11377/python">Python</a> </li> 
+       <li> <a href="/11015/swift">Swift</a> </li> 
+       <li> <a href="/10999/csharp">C#</a> </li> 
+       <li> <a href="/10995/c-cpp">C/C++</a> </li> 
+       <li> <a href="/11013/ruby">Ruby</a> </li> 
+       <li> <a href="/12809/dart" style="">Dart</a> </li> 
+       <li> <a href="/11589/batch" style="">Batch</a> </li> 
+       <li> <a href="javascript:void(0)" style="cursor:default;">База данных</a> 
+        <ul> 
+         <li> <a href="/10977/oracle">Oracle</a> </li> 
+         <li> <a href="/10989/mysql">MySQL</a> </li> 
+         <li> <a href="/10991/sql-server">SQL Server</a> </li> 
+         <li> <a href="/11335/postgresql">PostgreSQL</a> </li> 
+         <li> <a href="/10993/other-databases">Руководства Другие базы данных</a> </li> 
+        </ul> </li> 
+       <li> <a href="/11003/oracle-apex" style="">Oracle APEX</a> </li> 
+       <li> <a href="/10987/reporting">Report</a> </li> 
+       <li> <a href="/11001/client-side-programming">Client</a> </li> 
+       <li> <a href="/12171/javascript" style="">ECMAScript / Javascript</a> </li> 
+       <li> <a href="/11935/nodejs" style="">NodeJS</a> </li> 
+       <li> <a href="/11923/reactjs" style="">ReactJS</a> </li> 
+       <li> <a href="/12815/flutter" style="">Flutter</a> </li> 
+       <li> <a href="/12079/angularjs" style="">AngularJS</a> </li> 
+       <li> <a href="/12059/html" style="">HTML</a> </li> 
+       <li> <a href="/11829/css" style="">CSS</a> </li> 
+       <li> <a href="/11745/bootstrap" style="">Bootstrap</a> </li> 
+       <li> <a href="javascript:void(0)" style="cursor:default;">OS</a> 
+        <ul> 
+         <li> <a href="/11349/ubuntu">Ubuntu</a> </li> 
+         <li> <a href="/11347/solaris">Solaris</a> </li> 
+         <li> <a href="/11429/mac-os">Mac OS</a> </li> 
+        </ul> </li> 
+       <li> <a href="/11635/browser" style="">Браузеры</a> </li> 
+       <li> <a href="/11709/git" style="">Git</a> </li> 
+       <li> <a href="/11863/sap" style="">SAP</a> </li> 
+       <li> <a href="/11743/amazon-web-services" style="">Amazon AWS</a> </li> 
+       <li> <a href="javascript:void(0)" style="cursor:default;">Others</a> 
+        <ul> 
+         <li> <a href="/10975/uncategorized">Без рубрики</a> </li> 
+         <li> <a href="/11011/software">Software</a> </li> 
+         <li> <a href="/11885/virtualbox" style="">VirtualBox</a> </li> 
+         <li> <a href="/11887/vmware" style="">VmWare</a> </li> 
+        </ul> </li> 
+      </ul> 
+     </div> 
+    </section> 
+    <section id="section-root-under-menu-1"> 
+     <div class="ads-container"> <!-- Top-11 --> <!-- NETLINK --> <!-- Masthead_res --> 
+      <div id="div-gpt-ad-1608110235176-0"> 
+       <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110235176-0'); });
+  </script> 
+      </div> 
+     </div> 
+    </section> 
+    <section id="section-root-under-menu-2"> 
+    </section> 
+    <section id="section-root-middle"> 
+     <section id="section-article-center"> 
+      <article> 
+       <div id="style-switcher" style="right: -300px;" class="active"> 
+        <div id="style-switcher-panel"> 
+         <h3>Cодержание</h3> 
+         <div class="item-toc-data"> 
+          <div class="content-toc-container"> <a name="top"> </a> 
+           <ol> 
+            <li> <a href="#a864736">Что такое Jsoup?</a> </li> 
+            <li> <a href="#a864772">Библиотека Jsoup</a> </li> 
+            <li> <a href="#a864807">Быстро создать Maven project</a> </li> 
+            <li> <a href="#a867175">Jsoup API</a> </li> 
+            <li> <a href="#a867446">Манипулирование документом</a> <a name="top"> </a> 
+             <ol> 
+              <li> <a href="#a867451">Создать Document из URL</a> </li> 
+              <li> <a href="#a867486">Создать Document из File</a> </li> 
+              <li> <a href="#a867502">Создать &nbsp;Document из String</a> </li> 
+              <li> <a href="#a867541">Парсинг фрагмента HTML</a> </li> 
+             </ol> </li> 
+            <li> <a href="#a867625">Методы DOM</a> </li> 
+            <li> <a href="#a1029114">Методы индентичные Css, jQuery</a> </li> 
+           </ol> 
+          </div> 
+         </div> 
+         <div style="border-top: 1px solid #ff9249;"> 
+          <ul style="list-style-type: none; padding-left: 10px;"> 
+           <li><a target="_blank" href="/10983/html-xml-java-api">Java API для HTML, XML</a></li> 
+           <li><a target="_blank" href="/11005/java-open-source-libraries">Java Open source libraries</a></li> 
+          </ul> 
+         </div> 
+         <div id="style-switcher-toggle" class="on"></div> 
+        </div> 
+       </div> 
+       <h1 class="article-title"> Использование Java JSoup для анализа кода HTML </h1> 
+       <div id="categories-suggest"> 
+        <div class="list-container cat-entry"> 
+         <h4>View more Tutorials:</h4> 
+         <ul> 
+          <li><a target="_blank" href="/10983/html-xml-java-api">Java API для HTML, XML</a></li> 
+          <li><a target="_blank" href="/11005/java-open-source-libraries">Java Open source libraries</a></li> 
+         </ul> 
+        </div> 
+       </div> 
+       <div class="item-toc-data"> 
+        <div class="content-toc-container"> <a name="top"> </a> 
+         <ol> 
+          <li> <a href="#a864736">Что такое Jsoup?</a> </li> 
+          <li> <a href="#a864772">Библиотека Jsoup</a> </li> 
+          <li> <a href="#a864807">Быстро создать Maven project</a> </li> 
+          <li> <a href="#a867175">Jsoup API</a> </li> 
+          <li> <a href="#a867446">Манипулирование документом</a> <a name="top"> </a> 
+           <ol> 
+            <li> <a href="#a867451">Создать Document из URL</a> </li> 
+            <li> <a href="#a867486">Создать Document из File</a> </li> 
+            <li> <a href="#a867502">Создать &nbsp;Document из String</a> </li> 
+            <li> <a href="#a867541">Парсинг фрагмента HTML</a> </li> 
+           </ol> </li> 
+          <li> <a href="#a867625">Методы DOM</a> </li> 
+          <li> <a href="#a1029114">Методы индентичные Css, jQuery</a> </li> 
+         </ol> 
+        </div> 
+       </div> 
+       <div class="sharethis-inline-share-buttons" style="margin:5px 0px;"></div> 
+       <div class="item-data"> 
+        <div class="content-content-container"> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864783.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a864736"></a>1- Что такое Jsoup? </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-864736"> 
+           <div class="ads-container"> <!-- Body-21 --> <!-- NETLINK --> <!-- res1 --> 
+            <div id="div-gpt-ad-1608110313359-0"> 
+             <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110313359-0'); });
+  </script> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> <strong>Jsoup</strong> это&nbsp;<strong>Java HTML Parser</strong>. Сказать по-другому,&nbsp;<strong>Jsoup</strong>&nbsp;это библиотека использованная для анализа документа HTML. <strong>Jsoup </strong>предоставляет API для получения и манипулирования данными из URL или из файлов HTML. Использует методы похожие на <strong>DOM, CSS , JQuery</strong>&nbsp;чтобы получить данные и манипулировать ими. 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Посмотрим пример с&nbsp;<strong>Jsoup</strong>: 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           HelloJsoup.java
+          </div> 
+          <pre class="brush: java;">import java.io.IOException;  
+import org.jsoup.Jsoup;  
+import org.jsoup.nodes.Document;
+
+public class HelloJsoup {  
+
+   public static void main( String[] args ) throws IOException{  
+       Document doc = Jsoup.connect("http://eclipse.org").get();  
+       String title = doc.title();  
+       System.out.println("Title : " + title);  
+   }  
+
+}
+</pre> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a864772"></a>2- Библиотека Jsoup </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-864772"> 
+           <div class="ads-container"> <!-- Body-23 --> <!-- NETLINK --> <!-- res3 --> 
+            <div id="div-gpt-ad-1608110554074-0"> 
+             <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110554074-0'); });
+  </script> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Вы можете использовать Maven или скачать библиотеку Jsoup файла формата jar. 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <h3>С maven:</h3> 
+         </div> 
+         <div class="df-fragment df-text-xml"> 
+          <pre class="brush: xml;">&lt;!-- http://mvnrepository.com/artifact/org.jsoup/jsoup --&gt;
+
+&lt;dependency&gt;
+   &lt;groupId&gt;org.jsoup&lt;/groupId&gt;
+   &lt;artifactId&gt;jsoup&lt;/artifactId&gt;
+   &lt;version&gt;1.8.3&lt;/version&gt;
+&lt;/dependency&gt;
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <h3>Или можете скачать:</h3> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li><a href="http://mvnrepository.com/artifact/org.jsoup/jsoup" target="_blank">http://mvnrepository.com/artifact/org.jsoup/jsoup</a></li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864800.png"> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864804.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a864807"></a>3- Быстро создать Maven project </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-864807"> 
+           <div class="ads-container"> <!-- Body-32 - (Long) --> <!-- ADSENSE --> 
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3437774241435215" data-ad-slot="7118668151" data-ad-format="auto" data-full-width-responsive="true"></ins> 
+            <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           OK, мы быстро создадим Maven project чтобы протестировать примеры: 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Создать project <strong>JsoupTutorial</strong>: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864814.png"> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864820.png"> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Конвертировать в&nbsp;<strong>Maven</strong> Project. Нажмите на правую кнопку мыши на project, выберите: 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li><strong>Configure/Convert to Maven Project</strong></li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864837.png"> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864843.png"> 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/864860.png"> 
+         </div> 
+         <div class="df-fragment df-text-xml"> 
+          <div class="df-file-name">
+           pom.xml
+          </div> 
+          <pre class="brush: xml;">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;groupId&gt;org.o7planning&lt;/groupId&gt;
+   &lt;artifactId&gt;JsoupTutorial&lt;/artifactId&gt;
+   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+   &lt;dependencies&gt;
+
+       &lt;!-- http://mvnrepository.com/artifact/org.jsoup/jsoup --&gt;
+       &lt;dependency&gt;
+           &lt;groupId&gt;org.jsoup&lt;/groupId&gt;
+           &lt;artifactId&gt;jsoup&lt;/artifactId&gt;
+           &lt;version&gt;1.8.3&lt;/version&gt;
+       &lt;/dependency&gt;
+
+   &lt;/dependencies&gt;
+
+   &lt;build&gt;
+       &lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
+       &lt;plugins&gt;
+           &lt;plugin&gt;
+               &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+               &lt;version&gt;3.3&lt;/version&gt;
+               &lt;configuration&gt;
+                   &lt;source&gt;1.8&lt;/source&gt;
+                   &lt;target&gt;1.8&lt;/target&gt;
+               &lt;/configuration&gt;
+           &lt;/plugin&gt;
+       &lt;/plugins&gt;
+   &lt;/build&gt;
+&lt;/project&gt;
+</pre> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a867175"></a>4- Jsoup API </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-867175"> 
+           <div class="ads-container"> <!-- Body-31 - (Long) --> <!-- NETLINK --> <!-- res5 --> 
+            <div id="div-gpt-ad-1608110750587-0"> 
+             <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110750587-0'); });
+  </script> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> <strong>Jsoup</strong> включает много классов, но есть 3 самых важных класса, включает: 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li>org.jsoup.Jsoup</li> 
+           <li>org.jsoup.nodes.Document</li> 
+           <li>org.jsoup.nodes.Element<br> &nbsp;</li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li><strong>Jsoup.java</strong></li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%" class="alt">
+           <tbody>
+            <tr>
+             <th style="text-align:left; vertical-align:top">Метод</th>
+             <th style="text-align:left; vertical-align:top">Описание</th>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Connection connect(String url)</td>
+             <td style="vertical-align:top">Создает и возвращает объект <strong>Connection </strong>подключенный к&nbsp;<strong>URL</strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Document parse(File in, String charsetName)</td>
+             <td style="vertical-align:top">Анализирует файл документа&nbsp;<strong>HTML </strong>с определением&nbsp;<strong>charset </strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Document parse(File in, String charsetName, String baseUri)</td>
+             <td style="vertical-align:top">Анализирует файл документа&nbsp;<strong>HTML </strong>с определением <strong>charset</strong>, и <strong>baseUri</strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Document parse(String html)</td>
+             <td style="vertical-align:top">Анализирует код&nbsp;<strong>HTML </strong>и возвращает объект&nbsp;<strong>Document</strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Document parse(String html, String baseUri)</td>
+             <td style="vertical-align:top">Анализирует код <strong>HTML </strong>с <strong>baseUri </strong>в объект&nbsp;<strong>Document</strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static Document parse(URL url, int timeoutMillis)</td>
+             <td style="vertical-align:top">Анализирует&nbsp;<strong>URL </strong>в <strong>Document</strong>.</td>
+            </tr>
+            <tr>
+             <td style="vertical-align:top">static String clean(String bodyHtml, Whitelist whitelist)</td>
+             <td style="vertical-align:top">Возвращает безопасный&nbsp;<strong>HTML </strong>из введенного&nbsp;<strong>HTML</strong>, с помощью анализа введенного&nbsp;<strong>HTML </strong>и фильтрует через белый список (Whitelist) разрешенных тегов и атрибутов.</td>
+            </tr>
+           </tbody>
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li><strong>Document.java</strong></li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%" class="memberSummary">
+           <tbody>
+            <tr>
+             <th scope="col" style="vertical-align:text-top">Методы</th>
+             <th scope="col" style="vertical-align:text-top">Описание</th>
+            </tr>
+            <tr>
+             <td>Element body()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Доступ в элемент <strong>body</strong> документа&nbsp;<strong>HTML</strong>
+              </div></td>
+            </tr>
+            <tr>
+             <td>Charset charset()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает&nbsp;<strong>charset </strong>использованный в данном документе
+              </div></td>
+            </tr>
+            <tr>
+             <td>void charset(Charset&nbsp;charset)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Настраивает&nbsp;<strong>charset </strong>используемый для данного документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Document clone()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Создает версью&nbsp;<strong>copy </strong>данного документа, включая copy всех дочерних&nbsp;<strong>node</strong>.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Element createElement(String&nbsp;tagName)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Создает новый элемент&nbsp;
+              </div></td>
+            </tr>
+            <tr>
+             <td>static Document createShell(String&nbsp;baseUri)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Создает пустой документ&nbsp;(<strong>Document</strong>), подходящий для добавления элементов.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Element head()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Доступ к элементам head.
+              </div></td>
+            </tr>
+            <tr>
+             <td>String location()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает&nbsp;<strong>URL </strong>данного документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>String nodeName()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает node name данного node.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Document normalise()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Нормализирует документ.
+              </div></td>
+            </tr>
+            <tr>
+             <td>String outerHtml()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает&nbsp;<strong>Outer HTML</strong> данного&nbsp;<strong>node</strong>.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Document.OutputSettings outputSettings()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает объект настройки вывода для данного документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Document outputSettings(Document.OutputSettings&nbsp;outputSettings)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Настраивает вывод для документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>Document.QuirksMode quirksMode()</td>
+             <td style="vertical-align:text-top"><br></td>
+            </tr>
+            <tr>
+             <td>Document quirksMode(Document.QuirksMode&nbsp;quirksMode)&nbsp;</td>
+             <td style="vertical-align:text-top"><br></td>
+            </tr>
+            <tr>
+             <td>Element text(String&nbsp;text)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Настраивает содержание текста (text) в <strong>body </strong>данного документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>String title()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает содержание заголовка документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>void title(String&nbsp;title)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Настраивает содержание заголовка документа.
+              </div></td>
+            </tr>
+            <tr>
+             <td>boolean updateMetaCharsetElement()</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Возвращает&nbsp;<strong>true </strong>если элемент&nbsp;(element) с информацией&nbsp;<strong>charset </strong>в данном документе обновлен через метод <strong>Document.charset(Charset).</strong>
+              </div></td>
+            </tr>
+            <tr>
+             <td>void updateMetaCharsetElement(boolean&nbsp;update)</td>
+             <td style="vertical-align:text-top">
+              <div class="block">
+               Настраивает да или нет, этот элемент&nbsp;(element) с информацией&nbsp;<strong>charset </strong>обновленный через метод&nbsp;<strong>Document.charset(Charset)</strong>.
+              </div></td>
+            </tr>
+           </tbody>
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li><strong>Element.java</strong></li> 
+          </ul> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a867446"></a>5- Манипулирование документом </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-867446"> 
+           <div class="ads-container"> <!-- Body-33 - (Long) --> <!-- ADSENSE --> 
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3437774241435215" data-ad-slot="4300933122" data-ad-format="auto" data-full-width-responsive="true"></ins> 
+            <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="content-toc"> 
+          <h3> 5.1- Создать Document из URL <a name="a867451"></a> </h3> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           GetDocumentFromURL.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.document;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class GetDocumentFromURL {
+
+  public static void main(String[] args) throws IOException {
+      Document doc = Jsoup.connect("http://eclipse.org").get();
+      String title = doc.title();
+      System.out.println("Title : " + title);
+  }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Запуск примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/867482.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h3> 5.2- Создать Document из File <a name="a867486"></a> </h3> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           GetDocumentFromFile.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.document;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class GetDocumentFromFile {
+
+   public static void main(String[] args) throws IOException {
+       File htmlFile = new File("C:/index.html");
+       Document doc = Jsoup.parse(htmlFile, "UTF-8");
+       String title = doc.title();
+       System.out.println("Title : " + title);
+   }
+
+}
+</pre> 
+         </div> 
+         <div class="content-toc"> 
+          <h3> 5.3- Создать &nbsp;Document из String <a name="a867502"></a> </h3> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           GetDocumentFromString.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.document;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class GetDocumentFromString {
+
+  public static void main(String[] args) throws IOException {
+      String htmlString = "&lt;html&gt;&lt;head&gt;&lt;title&gt;Simple Page&lt;/title&gt;&lt;/head&gt;"
+                         + "&lt;body&gt;Hello&lt;/body&gt;&lt;/html&gt;";
+      Document doc = Jsoup.parse(htmlString);
+      String title = doc.title();
+      System.out.println("Title : " + title);
+      System.out.println("Content:\n");
+      System.out.println(doc.toString());
+  }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Запуск примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/867532.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h3> 5.4- Парсинг фрагмента HTML <a name="a867541"></a> </h3> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Полный документ&nbsp;<strong>HTML </strong>включает&nbsp;<strong>Header </strong>и&nbsp;<strong>Body</strong>, иногда вам нужно сделать парсинг фрагмента HTML. И вы можете получить полный дркумент HTML включая header &amp; body. Посмотрим пример: 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           ParsingBodyFragment.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.document;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public class ParsingBodyFragment {
+
+  public static void main(String[] args) throws IOException {
+      String htmlFragment = "&lt;h1&gt;Hi you!&lt;/h1&gt;&lt;p&gt;What is this?&lt;/p&gt;";
+      Document doc = Jsoup.parseBodyFragment(htmlFragment);
+      String fullHtml = doc.html();
+      System.out.println(fullHtml);
+  }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Запуск примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/867583.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a867625"></a>6- Методы DOM </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-867625"> 
+           <div class="ads-container"> <!-- Body-24 --> <!-- NETLINK --> <!-- res4 --> 
+            <div id="div-gpt-ad-1608110608567-0"> 
+             <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110608567-0'); });
+  </script> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Jsoup имеет некоторые методы почти похожие с методами в моделе DOM (Модель парсинга документа XML) 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%">
+           <tbody>
+            <tr>
+             <td><b>Метод</b></td>
+             <td><strong>Описание</strong></td>
+            </tr>
+            <tr>
+             <td>Element getElementById(String id)</td>
+             <td>Поиск элемента данный <strong>ID</strong>, включая или внизу данного элемента.</td>
+            </tr>
+            <tr>
+             <td>Elements getElementsByTag(String tag)</td>
+             <td>Поиск элементов, включая и рекурсивно внизу данного элемента, с определенным названием тега.</td>
+            </tr>
+            <tr>
+             <td>Elements getElementsByClass(String className)</td>
+             <td>Поиск элемента с classNam данный параметром, включая или внизу данного элемента.</td>
+            </tr>
+            <tr>
+             <td>Elements getElementsByAttribute(String key)</td>
+             <td>Поиск элементов с атрибутами данные параметром, не отличая прописные и строчные буквы.</td>
+            </tr>
+            <tr>
+             <td>Elements siblingElements()</td>
+             <td>Возвращает братские элеметы текущего элемента.</td>
+            </tr>
+            <tr>
+             <td>Element firstElementSibling()</td>
+             <td>Возвращает первый братский элемент текущего элемента.</td>
+            </tr>
+            <tr>
+             <td>Element lastElementSibling()</td>
+             <td>Возвращает последний братский элемент текущего элемента.</td>
+            </tr>
+            <tr>
+             <td colspan="2">&nbsp; ......</td>
+            </tr>
+           </tbody>
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Методы получения данных на Element. 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%">
+           <tbody>
+            <tr>
+             <td><strong>Метод</strong></td>
+             <td><strong>Описание</strong></td>
+            </tr>
+            <tr>
+             <td>String attr(String key)</td>
+             <td>Возвращает значение атрибута данный key этого элемента.</td>
+            </tr>
+            <tr>
+             <td>void attr(String key, String value)</td>
+             <td>Настроить значение атрибута. Если атрибут существет, он будет заменен.</td>
+            </tr>
+            <tr>
+             <td>String id()</td>
+             <td>Возвращает атрибут ID, если есть, или возвращает пустой string если нет.</td>
+            </tr>
+            <tr>
+             <td>String className()</td>
+             <td>Возвращает строку значения атрибута "class", может содержать много class name, отделенные пробелами. (Например&lt;div class="header gray"&gt; возвращает "header gray")</td>
+            </tr>
+            <tr>
+             <td>Set&lt;String&gt; classNames()</td>
+             <td>Возвращает все class names. Например &lt;div class="header gray"&gt;, возвращает набор 2 элементов "header" и "gray". Заметьте, редактирование в данном наборе не меняет атрибут элемента. Если вы хотите изменить используйте метод&nbsp;<em><strong>classNames(java.util.Set)</strong></em>.</td>
+            </tr>
+            <tr>
+             <td>String text()</td>
+             <td>Возвращает сочетание текста и всех текстов подэлементов.</td>
+            </tr>
+            <tr>
+             <td>void text(String value)</td>
+             <td>Настроить текст для данного элемента.</td>
+            </tr>
+            <tr>
+             <td>String html()</td>
+             <td>Возвращает String в HTML внутри данного тега. Например&nbsp;<strong><em>&lt;div&gt;&lt;p&gt;a&lt;/p&gt;</em></strong> возвращает&nbsp;<em><strong>&lt;p&gt;a&lt;/p&gt;</strong></em>. (<strong>Node.outerHtml() </strong>возвратит&nbsp;<em><strong>&lt;div&gt;&lt;p&gt;a&lt;/p&gt;&lt;/div&gt;</strong></em>.)</td>
+            </tr>
+            <tr>
+             <td>void html(String value)</td>
+             <td>Настроить Html внутри данного элемента. Удалить все готовые HTML внутри.</td>
+            </tr>
+            <tr>
+             <td>Tag tag()</td>
+             <td>Возвращает Tag этому элементу.</td>
+            </tr>
+            <tr>
+             <td>String tagName()</td>
+             <td>Возвращает название тега данного элемента. Например div.</td>
+            </tr>
+            <tr>
+             <td colspan="2">&nbsp; ......</td>
+            </tr>
+           </tbody>
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Методы манипулирования HTML: 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%"> 
+           <tbody> 
+            <tr> 
+             <td><strong>Методы</strong></td> 
+             <td><strong>Описание</strong></td> 
+            </tr> 
+            <tr> 
+             <td>Element append(String html)</td> 
+             <td>Соединяет HTML в данный элемент. Html предоставлен и будет проанализирован, и node будут соединены в конце дочерних node данного элемента.</td> 
+            </tr> 
+            <tr> 
+             <td>Element prepend(String html)</td> 
+             <td>Соединяет HTML в данный элемент. Html предоставлен и будет проанализирован, и node будут соединены в начале дочерних node данного элемента.</td> 
+            </tr> 
+            <tr> 
+             <td>Element appendText(String text)</td> 
+             <td>Создает и соединяет новый <strong>TextNode </strong>в данный элемент.</td> 
+            </tr> 
+            <tr> 
+             <td>Element prependText(String text)</td> 
+             <td>Создает и соединяет новый&nbsp;<strong>TextNode </strong>в начале дочерних node данного элемента.</td> 
+            </tr> 
+            <tr> 
+             <td>Element appendElement(String tagName)</td> 
+             <td>Создает новый элемент данный tag name. И соединяет его в конце как подэлемент.</td> 
+            </tr> 
+            <tr> 
+             <td>Element prependElement(String tagName)</td> 
+             <td>Создает новый элемент данный tag name. И соединяет его в начале как подэлемент.</td> 
+            </tr> 
+            <tr> 
+             <td>Element html(String value)</td> 
+             <td>Настраивает html внутри данного элемента. Удаляет все готовые Html внутри.</td> 
+            </tr> 
+            <tr> 
+             <td colspan="2">&nbsp; ......</td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Например, использовать методы DOM, сделать парсинг документа HTML написать информацию тега&nbsp;<em><strong>form</strong></em>. 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/868179.png"> 
+         </div> 
+         <div class="df-fragment df-text-html"> 
+          <div class="df-file-name">
+           register.html
+          </div> 
+          <pre class="brush: xml;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Register&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;form id="registerForm" action="doRegister" method="post"&gt;
+       &lt;table&gt;
+           &lt;tr&gt;
+               &lt;td&gt;User Name&lt;/td&gt;
+               &lt;td&gt;&lt;input type="text" name="userName" value="Tom" /&gt;&lt;/td&gt;
+           &lt;/tr&gt;
+           &lt;tr&gt;
+               &lt;td&gt;Password&lt;/td&gt;
+               &lt;td&gt;&lt;input type="password" name="password" value="Tom001" /&gt;&lt;/td&gt;
+           &lt;/tr&gt;
+           &lt;tr&gt;
+               &lt;td&gt;Email&lt;/td&gt;
+               &lt;td&gt;&lt;input type="email" name="email" value="theEmail@gmail.com" /&gt;&lt;/td&gt;
+           &lt;/tr&gt;
+           &lt;tr&gt;
+               &lt;td colspan="2"&gt;&lt;input type="submit" name="submit" value="Submit" /&gt;&lt;/td&gt;
+           &lt;/tr&gt;
+       &lt;/table&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           ReadHtmlForm.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.dom;
+
+import java.io.File;
+import java.io.IOException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class ReadHtmlForm {
+   
+   public static void main(String[] args) throws IOException {
+       
+       Document doc = Jsoup.parse(new File("files/register.html"), "utf-8");
+       
+       Element form = doc.getElementById("registerForm");
+       
+       System.out.println("Form action = "+ form.attr("action"));
+
+       Elements inputElements = form.getElementsByTag("input");
+       
+       for (Element inputElement : inputElements) {
+           String key = inputElement.attr("name");
+           String value = inputElement.attr("value");
+           
+           System.out.println(key + " =  " + value);
+       }
+   }
+   
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Запуск примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/868117.png"> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           GetAllLinks.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.dom;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class GetAllLinks {
+
+   public static void main(String[] args) throws IOException {
+
+       Document doc = Jsoup.connect("http://o7planning.org").get();
+
+       // Elements extends ArrayList&lt;Element&gt;.
+       Elements aElements = doc.getElementsByTag("a");
+
+       for (Element aElement : aElements) {
+           String href = aElement.attr("href");
+           String text = aElement.text();
+           System.out.println(text);
+           System.out.println("\t" + href);
+       }
+   }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Запуск примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/868159.png"> 
+         </div> 
+         <div class="content-toc"> 
+          <h2><a name="a1029114"></a>7- Методы индентичные Css, jQuery </h2> 
+          <div class="ct-place-holder" id="ct-place-holder-1029114"> 
+           <div class="ads-container"> <!-- Body-22 --> <!-- NETLINK --> <!-- res2 --> 
+            <div id="div-gpt-ad-1608110500857-0"> 
+             <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110500857-0'); });
+  </script> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Вы хотите найти или воспользоваться элементами используя синтаксисом похожим на <strong>CSS </strong>или <strong>jQuery</strong>? 
+         </div> 
+         <div class="df-fragment df-cktext-default"> <strong>JSoup</strong>&nbsp;предоставляет вам некоторые методы для того, чтобы сделать это: 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <ul> 
+           <li>Element.select(String selector)</li> 
+           <li>Elements.select(String selector)</li> 
+          </ul> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Например: 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <pre class="brush: java;">Connection conn = Jsoup.connect("http://o7planning.org");
+        
+Document doc = conn.get();
+
+// a with href
+Elements links = doc.select("a[href]");
+
+// img with src ending .png
+Elements pngs = doc.select("img[src$=.png]");
+
+// div with class=masthead
+Element masthead = doc.select("div.masthead").first();
+
+// direct a after h3
+Elements resultLinks = doc.select("h3.r &gt; a");
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Элементы <strong>JSoup </strong>поддерживают синтаксис похожий на <strong>CSS </strong>(или <strong>JQuery</strong>) помогающий вам найти соответствующие элементы. Такие поддержки очень сильны. Методы выбора есть наготове в классе <strong>Document</strong>, <strong>Element</strong> или&nbsp;<strong>Elements</strong>. 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <h3>Обзор Selector (Селектор).</h3> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%"> 
+           <tbody> 
+            <tr> 
+             <td><strong>Селектор</strong></td> 
+             <td><strong>Описание</strong></td> 
+            </tr> 
+            <tr> 
+             <td>tagname</td> 
+             <td>Искать элементы по тегу. Например: <strong>a</strong></td> 
+            </tr> 
+            <tr> 
+             <td>ns|tag</td> 
+             <td>Искать элементы по тегу в пространстве имент (namespace), например <strong>fb|name</strong> значит найти элементы <strong>&lt;fb:name&gt;</strong></td> 
+            </tr> 
+            <tr> 
+             <td>#id</td> 
+             <td>Искать элементы по ID, например <strong>#logo</strong></td> 
+            </tr> 
+            <tr> 
+             <td>.class:</td> 
+             <td>Искать элементы по названию класса, например&nbsp;<strong>.masthead</strong></td> 
+            </tr> 
+            <tr> 
+             <td>[attribute]</td> 
+             <td>Элементы с атрибутами, например <strong>[href]</strong></td> 
+            </tr> 
+            <tr> 
+             <td>[^attr]</td> 
+             <td>Элементы с атрибутами с приставкой, например <strong>[^data-]</strong> искать элементы с атрибутами начинающимися на data-</td> 
+            </tr> 
+            <tr> 
+             <td>[attr=value]</td> 
+             <td>Элементы со значениями атрибута, например <strong>[width=500]</strong> (Можно использовать ковычки)</td> 
+            </tr> 
+            <tr> 
+             <td>[attr^=value], [attr$=value], [attr*=value]</td> 
+             <td>Элементы со значениями атрибута, начинающиеся, заканчивающиеся, или содержащие значение, например <strong>[href*=/path/]</strong></td> 
+            </tr> 
+            <tr> 
+             <td>[attr~=regex]</td> 
+             <td>Элементы со значениями совпадающими с регулярным выражением, например <strong>img[src~=(?i)\.(png|jpe?g)]</strong></td> 
+            </tr> 
+            <tr> 
+             <td>*</td> 
+             <td>Все элементы, например *</td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <h3>Комбинации Selector&nbsp;</h3> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%"> 
+           <tbody> 
+            <tr> 
+             <td><strong>Selector</strong></td> 
+             <td><strong>Описание</strong></td> 
+            </tr> 
+            <tr> 
+             <td>el#id</td> 
+             <td>Элементы с ID, например <strong>div#logo</strong></td> 
+            </tr> 
+            <tr> 
+             <td>el.class</td> 
+             <td>Элементы с классом, например <strong>div.masthead</strong></td> 
+            </tr> 
+            <tr> 
+             <td>el[attr]</td> 
+             <td>Элементы с атрибутом, например <strong>a[href]</strong></td> 
+            </tr> 
+            <tr> 
+             <td>&nbsp;</td> 
+             <td>например <strong>a[href].highlight</strong></td> 
+            </tr> 
+            <tr> 
+             <td>ancestor child</td> 
+             <td>(Родительский элемент - наследованный элемент) Подэлементы родительского элемента, например . .<strong>body p</strong> ищет элемент <strong>p</strong> везде под блоком с классом <strong>"body"</strong></td> 
+            </tr> 
+            <tr> 
+             <td>parent &gt; child</td> 
+             <td>Прямые элементы наследники родительского элемента, например <strong>div.content &gt; p </strong>найти элементы <strong>p</strong> которые являются прямыми наследниками div имеющие <strong>class ='content'</strong>; и <strong>body &gt; *</strong> найти прямые подэлементы тега body</td> 
+            </tr> 
+            <tr> 
+             <td>siblingA + siblingB</td> 
+             <td>Найти элементы братья B сразу перед элементом A, например <strong>div.head + div</strong></td> 
+            </tr> 
+            <tr> 
+             <td>siblingA ~ siblingX</td> 
+             <td>Найти элементы братья X перед элементом A, например <strong>h1 ~ p</strong></td> 
+            </tr> 
+            <tr> 
+             <td>el, el, el</td> 
+             <td>Группа с разными <strong>Selector</strong>, ищет элементы подходящие к одному из <strong>Selector</strong>; например <strong>div.masthead</strong>, <strong>div.logo</strong></td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <h3>Pseudo selectors</h3> 
+         </div> 
+         <div class="df-fragment df-cktext-default"> 
+          <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%"> 
+           <tbody> 
+            <tr> 
+             <td><strong>Selector</strong></td> 
+             <td><strong>Описание</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:lt(n)</td> 
+             <td>Поиск элементов с родственным индексом (местоположение в дереве <strong>DOM </strong>связь с родтельским элементом) меньше n; например <strong>td:lt(3)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:gt(n)</td> 
+             <td>Поиск элементов с родственным индексом больше n, например <strong>div p:gt(2)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:eq(n)</td> 
+             <td>Поиск элементов с родственным индексом равным n; e.g. form <strong>input:eq(1)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:has(seletor)</td> 
+             <td>Поиск элементов содержащих элементы совпадающие с selector; например <strong>div:has(p)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:not(selector)</td> 
+             <td>Поиск элементов несовпадающих с <strong>Selector</strong>; например <strong>div:not(.logo)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:contains(text)</td> 
+             <td>Поиск элементов содержащих данный текст. Поиск не отличая заглавные или строчные буквы, например&nbsp;<strong>p:contains(jsoup)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:containsOwn(text)</td> 
+             <td>Поиск элементов которые напрямую содержат данный текст</td> 
+            </tr> 
+            <tr> 
+             <td>:matches(regex)</td> 
+             <td>Поиск элементов где текст не совпадает с определенным обычным выражением; например <strong>div:matches((?i)login)</strong></td> 
+            </tr> 
+            <tr> 
+             <td>:matchesOwn(regex)</td> 
+             <td>Поиск элементов где текст совпадает с определенным обычным выражением.</td> 
+            </tr> 
+            <tr> 
+             <td colspan="2">Примечение: Способ индекса pseudo начинается с 0, первый элемент имеет индекс 0, второй элемент имеет индекс 1,..</td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           QueryLinks.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.selector;
+
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class QueryLinks {
+
+    public static void main(String[] args) throws IOException {
+        Connection conn = Jsoup.connect("http://o7planning.org");
+        
+        Document doc = conn.get();
+        
+        // Query &lt;a&gt; elements, href contain /document/
+        String cssQuery = "a[href*=/document/]";
+        Elements elements=    doc.select(cssQuery);
+        
+        Iterator&lt;Element&gt; iterator = elements.iterator();
+        
+        while(iterator.hasNext())  {
+            Element e = iterator.next();
+            System.out.println(e.attr("href"));
+        }
+        
+    }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Результаты запуска примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/1041889.png"> 
+         </div> 
+         <div class="df-fragment df-text-html"> 
+          <div class="df-file-name">
+           document.html
+          </div> 
+          <pre class="brush: xml;">&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Jsoup Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;h1&gt;Java Tutorial For Beginners&lt;/h1&gt;
+ &lt;br&gt;
+ &lt;div id="content"&gt;
+   Content ....
+ &lt;/div&gt;
+
+ &lt;div class="related-container"&gt;
+    &lt;h3&gt;Related Documents&lt;/h3&gt;
+    &lt;a href="http://o7planning.org/web/fe/default/en/document/649342/guide-to-installing-and-configuring-eclipse"&gt;
+       Guide to Installing and Configuring Eclipse
+    &lt;/a&gt;
+    &lt;a href="http://o7planning.org/web/fe/default/en/document/649326/guide-to-installing-and-configuring-java"&gt;
+       Guide to Installing and Configuring Java  
+    &lt;/a&gt;
+    &lt;a href="http://o7planning.org/web/fe/default/en/document/245310/jdk-javadoc-in-chm-format"&gt;
+       Jdk Javadoc in chm format
+    &lt;/a&gt;
+   
+ &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre> 
+         </div> 
+         <div class="df-fragment df-text-java"> 
+          <div class="df-file-name">
+           SelectorDemo1.java
+          </div> 
+          <pre class="brush: java;">package org.o7planning.tutorial.jsoup.selector;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+public class SelectorDemo1 {
+
+    public static void main(String[] args) throws IOException {
+        File htmlFile = new File("document.html");
+        Document doc = Jsoup.parse(htmlFile, "UTF-8");
+
+        // First &lt;div&gt; element has class ="related-container"
+        Element div = doc.select("div.related-container").first();
+
+        // List the &lt;h3&gt;, the direct child elements of the current element.
+        Elements h3Elements = div.select("&gt; h3");
+
+        // Get first &lt;h3&gt; element
+        Element h3 = h3Elements.first();
+
+        System.out.println(h3.text());
+
+        // List &lt;a&gt; elements, is a descendant of the current element
+        Elements aElements = div.select("a");
+
+       
+        // Query the current element list.
+        // The element that href contains 'installing'.
+        Elements aEclipses = aElements.select("[href*=Installing]");
+
+        Iterator&lt;Element&gt; iterator = aEclipses.iterator();
+
+        while (iterator.hasNext()) {
+            Element a = iterator.next();
+            System.out.println("Document: "+ a.text());
+        }
+    }
+
+}
+</pre> 
+         </div> 
+         <div class="df-fragment df-cktext-default">
+           Результаты запуска примера: 
+         </div> 
+         <div class="df-fragment df-binary-image"> 
+          <img alt="" data-img-marker="true" src="https://s1.o7planning.com/ru/10399/images/1041914.png"> 
+         </div> 
+        </div> 
+       </div> 
+       <div id="categories-suggest"> 
+        <div class="list-container cat-entry"> 
+         <h4>View more Tutorials:</h4> 
+         <ul> 
+          <li><a target="_blank" href="/10983/html-xml-java-api">Java API для HTML, XML</a></li> 
+          <li><a target="_blank" href="/11005/java-open-source-libraries">Java Open source libraries</a></li> 
+         </ul> 
+        </div> 
+       </div> 
+       <div id="other-sponsors"> 
+       </div> 
+      </article> 
+      <div id="under-article-ads"> 
+      </div> 
+      <div class="affiliate"> 
+      </div> 
+     </section> <sidebar id="section-article-sidebar"> 
+      <section class="sidebar-section"> 
+       <div class="ads-container"> <!-- Sidebar-41 (Top) --> <!-- NETLINK --> <!-- 300x250_right1 --> 
+        <div id="div-gpt-ad-1608110835527-0" style="width: 300px; height: 250px;"> 
+         <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110835527-0'); });
+  </script> 
+        </div> 
+       </div> 
+      </section> 
+      <nav class="sidebar-nav"> 
+       <div class="list-container cat-entry" style="color:#CC0033;"> 
+        <h4>Связанные категории статей</h4> 
+        <ul> 
+         <li> <a href="/10983/html-xml-java-api">Java API для HTML, XML</a> </li> 
+         <li> <a href="/11005/java-open-source-libraries">Java Open source libraries</a> </li> 
+        </ul> 
+       </div> 
+       <div class="list-container cat-entry"> 
+        <h4>Java API для HTML, XML</h4> 
+        <ul> 
+         <li> <a href="/10145/java-sax-parser">Анализ XML-файла с помощью Java SAX</a> </li> 
+         <li> <a href="/10149/java-jdom2-xml-parser">Руководство Java JDOM2</a> </li> 
+         <li> <a href="/10143/java-jaxb">Руководство Java Architecture for XML Binding (JAXB)</a> </li> 
+         <li> <a href="/10463/java-xstream">Руководство Java XStream</a> </li> 
+         <li> <a href="/10399/jsoup-java-html-parser">Использование Java JSoup для анализа кода HTML</a> </li> 
+        </ul> 
+       </div> 
+       <div class="list-container cat-entry"> 
+        <h4>Java Open source libraries</h4> 
+        <ul> 
+         <li> <a href="/10189/explore-the-facebook-graph-api">Изучите Facebook Graph API</a> </li> 
+         <li> <a href="/11917/create-credentials-for-google-drive-api">Создание Credentials для Google Drive API</a> </li> 
+         <li> <a href="/11889/manipulating-files-and-folders-on-google-drive-using-java">Манипулирование файлами и папками в Google Drive с использованием Java</a> </li> 
+         <li> <a href="/10543/get-hardware-information-in-java-application">Получить информацию об оборудовании в приложении Java</a> </li> 
+         <li> <a href="/10437/java-json-processing-api">Руководство Java JSON Processing API (JSONP)</a> </li> 
+         <li> <a href="/10339/using-scribe-oauth-java-api-with-google-oauth-2">Использование Scribe OAuth Java API с Google OAuth 2</a> </li> 
+         <li> <a href="/10191/java-restfb">Restfb Java API для Facebook</a> </li> 
+         <li> <a href="/10149/java-jdom2-xml-parser">Руководство Java JDOM2</a> </li> 
+         <li> <a href="/10463/java-xstream">Руководство Java XStream</a> </li> 
+         <li> <a href="/10399/jsoup-java-html-parser">Использование Java JSoup для анализа кода HTML</a> </li> 
+         <li> <a href="/10455/retrieve-geographic-information-based-on-ip-address-using-geoip2-java-api">Получение географической информации на основе IP-адреса с помощью GeoIP2 Java API</a> </li> 
+         <li> <a href="/11259/read-write-excel-file-in-java-using-apache-poi">Чтение и запись файла Excel в Java с использованием Apache POI</a> </li> 
+        </ul> 
+       </div> 
+      </nav> 
+      <section class="sidebar-section"> 
+       <div class="ads-container"> <!-- Sidebar-51 (Middle) --> <!-- NETLINK --> <!-- 300x250_right2 --> 
+        <div id="div-gpt-ad-1608110992085-0" style="width: 300px; height: 250px;"> 
+         <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608110992085-0'); });
+  </script> 
+        </div> 
+       </div> 
+       <div class="ads-container"> <!-- Sidebar-52 (Middle) --> <!-- NO ADS --> 
+       </div> 
+      </section> 
+      <nav class="sidebar-nav"> 
+       <div class="list-container cat-entry" style="color:#006633;"> 
+        <h4>Самые новые руководства</h4> 
+        <ul> 
+         <li> <a href="/13109/flutter-align">Руководство Flutter Align</a> </li> 
+         <li> <a href="/13219/flutter-alignment">Руководство Flutter Alignment</a> </li> 
+         <li> <a href="/12909/flutter-container">Руководство Flutter Container</a> </li> 
+         <li> <a href="/13213/introduction-to-digitalocean-spaces">Введение в DigitalOcean Spaces</a> </li> 
+         <li> <a href="/13169/flutter-sizedbox">Руководство Flutter SizedBox</a> </li> 
+         <li> <a href="/13197/how-to-reduce-amazon-cloudfront-costs">Как уменьшить расходы Amazon CloudFront?</a> </li> 
+         <li> <a href="/13193/introduction-to-amazon-s3">Введение в Amazon S3</a> </li> 
+         <li> <a href="/13199/introduction-to-amazon-cloudfront">Введение в Amazon Cloudfront и его архитектуру</a> </li> 
+         <li> <a href="/13165/flutter-linearprogressindicator">Руководство Flutter LinearProgressIndicator</a> </li> 
+         <li> <a href="/13167/flutter-rotatedbox">Руководство Flutter RotatedBox</a> </li> 
+        </ul> 
+       </div> 
+      </nav> 
+      <section id="sidebar-section-float"> 
+       <div id="sidebar-float-marker" style="padding:5px;"></div> 
+       <div class="ads-container"> <!-- Sidebar-61 (Float) --> <!-- NETLINK --> <!-- 300x600_Sticky --> 
+        <div id="div-gpt-ad-1608111095491-0" style="width: 300px; height: 600px;"> 
+         <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1608111095491-0'); });
+  </script> 
+        </div> 
+       </div> 
+       <div class="ads-container"> <!-- Sidebar-62 (Float) --> <!-- NETLINK --> 
+       </div> 
+      </section> 
+     </sidebar> 
+    </section> 
+    <section id="section-root-above-footer-1"> 
+     <div class="ads-container"> <!-- Bottom-81 --> <!-- ADSENSE --> 
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3437774241435215" data-ad-slot="4193175819" data-ad-format="auto" data-full-width-responsive="true"></ins> 
+      <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script> 
+     </div> 
+    </section> 
+    <section id="section-root-above-footer-2"> 
+    </section> 
+   </div> 
+  </div> 
+  <footer> 
+   <div id="footer-container" class="page-max-width"> 
+    <div class="site"> <span id="footer-logo" style="margin-right:5px;"> <img src="https://s2.o7planning.com/templates/o7planning/resources/icons/triceratops-footer.png" height="16"> </span> o7planning.org 
+    </div> 
+    <div class="statistics"> 
+    </div> 
+    <div class="statistics"> 
+    </div> 
+   </div> 
+  </footer> 
+  <section id="section-root-bottom-floating"> 
+   <div id="ads-floating-bottom"> 
+    <div id="ads-floating-bottom-close" onclick="closeBottomFloatingAds()"></div> 
+    <div class="ads-container" style="margin: 0 auto; display:inline-block"> <!-- Bottom-71 (Float) --> <!-- NETLINK --> <!-- footer (res) --> 
+     <div id="div-gpt-ad-1609211431265-0"> 
+      <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1609211431265-0'); });
+  </script> 
+     </div> 
+    </div> 
+   </div> 
+  </section> 
+  <div id="nav-controls"> <a href="javascript:top.window.scrollTo(0,0)" title="Top"> <img alt="Top" border="0" src="https://s2.o7planning.com/templates/o7planning/resources/images/go-top.png"></a> 
+   <br> <a href="javascript:window.scrollTo(document.body.clientWidth,document.body.clientHeight/2)" title="Center"> <img alt="Middle page" border="0" src="https://s2.o7planning.com/templates/o7planning/resources/images/go-center.png"></a> 
+   <br> <a href="javascript:window.scrollTo(document.body.clientWidth,document.body.clientHeight)" title="Bottom"> <img alt="Bottom" border="0" src="https://s2.o7planning.com/templates/o7planning/resources/images/go-bottom.png"></a> 
+  </div> 
+  <script>SyntaxHighlighter.highlight();</script>  
+ </body>
+</html>
